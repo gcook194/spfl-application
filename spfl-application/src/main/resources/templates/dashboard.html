@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Scottish Fitbaw</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <!-- jQuery -->
+    <script type="text/javascript" th:src="@{webjars/jquery/3.4.1/jquery.min.js}"></script>
+    
+    <!-- bootstrap -->
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+    
+    <!-- stylesheet -->
+    <link rel="stylesheet" th:href="@{css/style.css}"/>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<table class="table table-hover league-table">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th colspan="4"></th>
+							<th class="font-weight-light"><small>Played</small></th>
+							<th class="font-weight-light"><small>W</small></th>
+							<th class="font-weight-light"><small>D</small></th>
+							<th class="font-weight-light"><small>L</small></th>
+							<th class="font-weight-light"><small>+/-</small></th>
+							<th class="font-weight-light"><small>Difference</small></th>
+							<th class="font-weight-light"><small>Points</small></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="entry,iter  : ${premiershipTable.entries}">
+							<td th:if="${iter.index == 0}" style="background-color: rgb(19, 143, 22); width: 1%;"></td>
+							<td th:if="${iter.index > 0 && iter.index < 3}" style="background-color: rgb(58, 176, 211); width: 1%;"></td>
+							<td th:if="${iter.index > 2 && iter.index < 10}" style="background-color: rgb(255, 255, 255); width: 1%;"></td>
+							<td th:if="${iter.index == 10}" style="background-color: rgb(238, 172, 87); width: 1%;"></td>
+							<td th:if="${iter.index == 11}" style="background-color: rgb(215, 84, 82); width: 1%;"></td>
+							<td>[[${iter.index +1}]]</td>
+							<td colspan="4">
+								<img th:src="${entry.teamBadgeUrl}" alt="badge" width="30px" height="30px"/>
+								<span class="ml-4">[[${entry.teamName}]]</span>
+							</td>
+							<td>[[${entry.matchesPlayed}]]</td>
+							<td>[[${entry.wins}]]</td>
+							<td>[[${entry.draws}]]</td>
+							<td>[[${entry.losses}]]</td>
+							<td>[[${entry.goalsScored}]] / [[${entry.goalsConceded}]]</td>
+							<td>[[${entry.goalDifference}]]</td>
+							<td><strong>[[${entry.points}]]</strong></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
