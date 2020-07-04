@@ -40,15 +40,15 @@
 	</nav>
 	<main role="main" class="container-fluid">
 		<div class="row">
-			<div class="col bg-white mx-2 p-4 border rounded shadow-sm">
+			<div class="col-xs col-lg bg-white mx-2 p-4 border rounded shadow-sm">
 				<div class="row">
 					<div class="col"><h2>[[${league.name}]]</h2></div>
 				</div>
 			</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-8 bg-white p-4 mx-2 border rounded shadow-sm">
-				<h2>Table</h2>
+			<div class="col-xs-12 col-lg-8 bg-white p-4 m-2 border rounded shadow-sm">
+				<h2>Tables</h2>
 				<div class="table-responsive">
 					<table class="table table-hover league-table">
 						<thead>
@@ -89,26 +89,30 @@
 					</table>				
 				</div>				
 			</div>
-			<div class="col bg-white p-4 mr-2 border rounded shadow-sm">
-				<h2>Results</h2>
+			<div class="col-xs col-lg bg-white p-4 m-2 border rounded shadow-sm">
+				<h2>Matches</h2>
 				<th:block th:each="result, iter : ${results}">
 					<th:block th:if="${iter.index < 10}">
 						<div class="row mb-2">
-							<div class="col-12">
+							<div class="col-xs col-12">
+								<span class="small">[[${#temporals.format(result.fixtureDateTime, 'dd-MM-yyyy HH:mm')}]]</span>
+							</div>
+							<div class="col-xs col-12 mb-2">
 								[[${result.stadium}]]
 							</div>
-							<div class="col-5 text-right">
+							<div class="col-xs-4 col-5 text-right">
 								<span>[[${#strings.abbreviate(result.homeTeamName, 12)}]]&nbsp;</span>
 								<img th:src="${result.homeTeamBadge}" alt="badge" width="20px" height="20px"/>	
 							</div>
-							<div class="col-2 text-center">
+							<div class="col-xs col-2 text-center">
 								[[${result.homeGoals}]] - [[${result.awayGoals}]]
 							</div>
-							<div class="col-5 text-left">
+							<div class="col-xs-4 col-5 text-left">
 								<img th:src="${result.awayTeamBadge}" alt="badge" width="20px" height="20px"/>
 								<span>&nbsp;[[${#strings.abbreviate(result.awayTeamName, 12)}]]</span>
 							</div>					
-						</div>				
+						</div>	
+						<hr />			
 					</th:block>
 				</th:block>
 			</div>
