@@ -20,12 +20,17 @@ public class DashboardController {
 		this.tableMgr = tableMgr;
 	}
 
-	@GetMapping
+	@GetMapping("table")
 	public ModelAndView showDashboard() {
 		
 		LeagueTable premiershipTable = tableMgr.getTableByLeague(574L).get(0);
 		
 		return new ModelAndView("dashboard").addObject("premiershipTable", premiershipTable);
+	}
+	
+	@GetMapping
+	public ModelAndView showHomePage() {
+		return new ModelAndView("index");
 	}
 
 }

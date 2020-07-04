@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Scottish Fitbaw</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <!-- jQuery -->
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    
+    <!-- bootstrap -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+    
+    <!-- stylesheet -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#">SPFL</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarCollapse" aria-controls="navbarCollapse"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#">Premiership
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Championship</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">League One</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">League Two</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Scottish Cup</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">League Cup</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Challenge Cup</a></li>
+			</ul>
+		</div>
+	</nav>
+	<main role="main" class="container-fluid">
+		<div class="row">
+			<div class="col bg-white mx-2 p-4 border rounded shadow-sm">
+				<div class="row">
+					<div class="col"><h2>[[${league.name}]]</h2></div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-2">
+			<div class="col-8 bg-white p-4 mx-2 border rounded shadow-sm">
+				<h2>Table</h2>
+				<div class="table-responsive">
+					<table class="table table-hover league-table">
+						<thead>
+							<tr>
+								<th></th>
+								<th></th>
+								<th colspan="4"></th>
+								<th class="font-weight-light"><small>Played</small></th>
+								<th class="font-weight-light"><small>W</small></th>
+								<th class="font-weight-light"><small>D</small></th>
+								<th class="font-weight-light"><small>L</small></th>
+								<th class="font-weight-light"><small>+/-</small></th>
+								<th class="font-weight-light"><small>Difference</small></th>
+								<th class="font-weight-light"><small>Points</small></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="entry,iter  : ${leagueTable.entries}">
+								<td th:if="${iter.index == 0}" style="background-color: rgb(19, 143, 22); width: 1%;"></td>
+								<td th:if="${iter.index > 0 && iter.index < 3}" style="background-color: rgb(58, 176, 211); width: 1%;"></td>
+								<td th:if="${iter.index > 2 && iter.index < 10}" style="background-color: rgb(255, 255, 255); width: 1%;"></td>
+								<td th:if="${iter.index == 10}" style="background-color: rgb(238, 172, 87); width: 1%;"></td>
+								<td th:if="${iter.index == 11}" style="background-color: rgb(215, 84, 82); width: 1%;"></td>
+								<td>[[${iter.index +1}]]</td>
+								<td colspan="4">
+									<img th:src="${entry.teamBadgeUrl}" alt="badge" width="30px" height="30px"/>
+									<span class="ml-4">[[${entry.teamName}]]</span>
+								</td>
+								<td>[[${entry.matchesPlayed}]]</td>
+								<td>[[${entry.wins}]]</td>
+								<td>[[${entry.draws}]]</td>
+								<td>[[${entry.losses}]]</td>
+								<td>[[${entry.goalsScored}]] / [[${entry.goalsConceded}]]</td>
+								<td>[[${entry.goalDifference}]]</td>
+								<td><strong>[[${entry.points}]]</strong></td>
+							</tr>
+						</tbody>
+					</table>				
+				</div>				
+			</div>
+			<div class="col bg-white p-4 mr-2 border rounded shadow-sm">
+				<h2>Results</h2>
+				<th:block th:each="result, iter : ${results}">
+					<th:block th:if="${iter.index < 10}">
+						<div class="row mb-2">
+							<div class="col-12">
+								[[${result.stadium}]]
+							</div>
+							<div class="col-5 text-right">
+								<span>[[${#strings.abbreviate(result.homeTeamName, 12)}]]&nbsp;</span>
+								<img th:src="${result.homeTeamBadge}" alt="badge" width="20px" height="20px"/>	
+							</div>
+							<div class="col-2 text-center">
+								[[${result.homeGoals}]] - [[${result.awayGoals}]]
+							</div>
+							<div class="col-5 text-left">
+								<img th:src="${result.awayTeamBadge}" alt="badge" width="20px" height="20px"/>
+								<span>&nbsp;[[${#strings.abbreviate(result.awayTeamName, 12)}]]</span>
+							</div>					
+						</div>				
+					</th:block>
+				</th:block>
+			</div>
+		</div>
+	</main>
+</body>
+</html>
