@@ -22,4 +22,11 @@ public interface FixtureManager {
 	 * @return
 	 */
 	Optional<List<Fixture>> getRecentFixturesByStatusAndLeagueResourceId(String status, long leagueResourceId);
+
+	/**
+	 * gets a list of fixtures where the status is not FT, AET or PEN
+	 * @param l
+	 * @return
+	 */
+	Optional<List<Fixture>> getUnPlayedFixturesByLeagueResourceId(long leagueResourceId);
 }

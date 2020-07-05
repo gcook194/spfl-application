@@ -47,4 +47,16 @@ public class FixtureManagerImpl implements FixtureManager {
 			      .getFixtures());
 	}
 
+	@Override
+	public Optional<List<Fixture>> getUnPlayedFixturesByLeagueResourceId(long leagueResourceId) {
+		return Optional.ofNullable(webClient
+			      .get()
+			      .uri(fixtureServiceUrl + "/fixtures/status/unplayed/league/" + leagueResourceId + "?fixtureDateDesc=true")
+			      .retrieve()
+			      .toEntity(FixtureListResponse.class)
+			      .block()
+			      .getBody()
+			      .getFixtures());
+	}
+
 }

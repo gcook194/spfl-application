@@ -22,6 +22,10 @@ public class LeagueTableEntry implements Comparable<LeagueTableEntry> {
 	private int wins; 
 	private int draws; 
 	private int losses; 
+	private float goalsScoredPerGame; 
+	private float goalsConcededPerGame; 
+	private float goalDifferencePerGame;
+	private float pointsPerGame; 
 	private List<String> form = new ArrayList<>(4);
 	
 	public LeagueTableEntry(String teamName) {
