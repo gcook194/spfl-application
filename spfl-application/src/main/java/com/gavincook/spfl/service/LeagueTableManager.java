@@ -3,6 +3,7 @@ package com.gavincook.spfl.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.gavincook.spfl.model.Competition;
 import com.gavincook.spfl.model.LeagueTable;
 
 public interface LeagueTableManager {
@@ -33,12 +34,26 @@ public interface LeagueTableManager {
 	 * @param l
 	 * @return
 	 */
-	Optional<LeagueTable> getTopGoalsPerGameByLeagueResourceId(long l);
+	Optional<LeagueTable> getTopGoalsPerGameByLeagueResourceId(long leagueResourceId);
 
 	/**
-	 * Takes a league table and sorts it by goals conceded divided by number of fixtures player ascending
+	 * Takes a league table and sorts it by goals conceded divided by number of fixtures played ascending
 	 * @param l
 	 * @return
 	 */
-	Optional<LeagueTable> getTopDefensiveTeamPerGameByLeagueResourceId(long l);
+	Optional<LeagueTable> getTopDefensiveTeamPerGameByLeagueResourceId(long leagueResourceId);
+
+	/**
+	 * Takes a league table entry and sorts it by goal difference descending
+	 * @param l
+	 * @return
+	 */
+	Optional<LeagueTable> getTopGoalDifferenceByLeagueResourceId(long leagueResourceId);
+
+	/**
+	 * Takes a league table entry and sorts it by goal difference divided by number of fixtures played descending
+	 * @param i
+	 * @return
+	 */
+	Optional<LeagueTable> getTopGoalDifferencePerGameByLeagueResourceId(long leagueResourceId);
 }

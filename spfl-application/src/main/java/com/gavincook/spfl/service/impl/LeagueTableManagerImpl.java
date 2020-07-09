@@ -93,4 +93,30 @@ public class LeagueTableManagerImpl implements LeagueTableManager {
 			      .get(0));
 	}
 
+	@Override
+	public Optional<LeagueTable> getTopGoalDifferenceByLeagueResourceId(long leagueResourceId) {
+		return Optional.ofNullable(webClient
+			      .get()
+			      .uri(leagueTableServiceUrl + "/league-tables/" + leagueResourceId + "/goal-difference")
+			      .retrieve()
+			      .toEntity(LeagueTableResponse.class)
+			      .block()
+			      .getBody()
+			      .getLeagueTables()
+			      .get(0));
+	}
+
+	@Override
+	public Optional<LeagueTable> getTopGoalDifferencePerGameByLeagueResourceId(long leagueResourceId) {
+		return Optional.ofNullable(webClient
+			      .get()
+			      .uri(leagueTableServiceUrl + "/league-tables/" + leagueResourceId + "/goal-difference-per-game")
+			      .retrieve()
+			      .toEntity(LeagueTableResponse.class)
+			      .block()
+			      .getBody()
+			      .getLeagueTables()
+			      .get(0));
+	}
+
 }

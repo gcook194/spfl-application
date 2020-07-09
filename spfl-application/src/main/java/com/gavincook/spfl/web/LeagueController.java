@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gavincook.spfl.Constants;
@@ -41,10 +43,6 @@ public class LeagueController {
 		Optional<LeagueTable> leagueTable;
 		Optional<List<Fixture>> results;
 		Optional<List<Fixture>> fixtures;
-		Optional<LeagueTable> topScoringTeams;
-		Optional<LeagueTable> topDefensiveTeams;
-		Optional<LeagueTable> goalsPerGame;
-		Optional<LeagueTable> goalsConcededPerGame;
 		
 		switch (leagueName) {
 		case Constants.LEAGUE_NAME_PREMIERSHIP:
@@ -53,10 +51,14 @@ public class LeagueController {
 			leagueTable = Optional.of(tableMgr.getTableByLeague(574L).get(0));
 			results = fixtureMgr.getRecentFixturesByStatusAndLeagueResourceId("FT", 574L);
 			fixtures = fixtureMgr.getUnPlayedFixturesByLeagueResourceId(574L);
-			topScoringTeams = tableMgr.getTopScoringTeamsByLeagueResourceId(574L);
-			topDefensiveTeams = tableMgr.getTopDefensiveTeamsByLeagueResourceId(574L);
-			goalsPerGame = tableMgr.getTopGoalsPerGameByLeagueResourceId(574L);
-			goalsConcededPerGame = tableMgr.getTopDefensiveTeamPerGameByLeagueResourceId(574L);
+			
+			break;
+		case Constants.LEAGUE_NAME_CHAMPIONSHIP: 
+			
+			league = leagueMgr.getCompetitionById(573L);
+			leagueTable = Optional.of(tableMgr.getTableByLeague(573L).get(0));
+			results = fixtureMgr.getRecentFixturesByStatusAndLeagueResourceId("FT", 573L);
+			fixtures = fixtureMgr.getUnPlayedFixturesByLeagueResourceId(573L);
 			
 			break;
 		default:
@@ -65,10 +67,6 @@ public class LeagueController {
 			leagueTable = Optional.of(tableMgr.getTableByLeague(574L).get(0));
 			results = fixtureMgr.getRecentFixturesByStatusAndLeagueResourceId("FT", 574L);
 			fixtures = fixtureMgr.getUnPlayedFixturesByLeagueResourceId(574L);
-			topScoringTeams = tableMgr.getTopScoringTeamsByLeagueResourceId(574L);
-			topDefensiveTeams = tableMgr.getTopDefensiveTeamsByLeagueResourceId(574L);
-			goalsPerGame = tableMgr.getTopGoalsPerGameByLeagueResourceId(574L);
-			goalsConcededPerGame = tableMgr.getTopDefensiveTeamPerGameByLeagueResourceId(574L);
 			
 			break;
 		}
@@ -77,12 +75,38 @@ public class LeagueController {
 		leagueTable.ifPresent(lt -> mav.addObject("leagueTable", lt));
 		results.ifPresent(r -> mav.addObject("results", r));
 		fixtures.ifPresent(f -> mav.addObject("fixtures", f));
-		topScoringTeams.ifPresent(ts -> mav.addObject("topScoringTeams", ts));
-		topDefensiveTeams.ifPresent(td -> mav.addObject("topDefensiveTeams", td));
-		goalsPerGame.ifPresent(gpg -> mav.addObject("topScoringTeamsPerGame", gpg));
-		goalsConcededPerGame.ifPresent(gcpg -> mav.addObject("topDefensiveTeamPerGame", gcpg));
 		
 		return mav;
+	}
+
+	@GetMapping("/{leagueId}/goal-difference-per-game-chart.json")
+	public @ResponseBody ResponseEntity<LeagueTable> getGoalDifferencePerGameChart(@PathVariable long leagueId) {
+		return ResponseEntity.ok(tableMgr.getTopGoalDifferencePerGameByLeagueResourceId(leagueId).get());
+	}	
+	
+	@GetMapping("/{leagueId}/goals-conceded-per-game-chart.json")
+	public @ResponseBody ResponseEntity<LeagueTable> getGoalsConcededPerGameChart(@PathVariable long leagueId) {
+		return ResponseEntity.ok(tableMgr.getTopDefensiveTeamPerGameByLeagueResourceId(leagueId).get());
+	}
+	
+	@GetMapping("/{leagueId}/goals-conceded-chart.json")
+	public @ResponseBody ResponseEntity<LeagueTable> getGoalsConcededChart(@PathVariable long leagueId) {
+		return ResponseEntity.ok(tableMgr.getTopDefensiveTeamsByLeagueResourceId(leagueId).get());
+	}
+	
+	@GetMapping("/{leagueId}/goals-scored-per-game-chart.json")
+	public @ResponseBody ResponseEntity<LeagueTable> getGoalsScoredPerGameChart(@PathVariable long leagueId) {
+		return ResponseEntity.ok(tableMgr.getTopGoalsPerGameByLeagueResourceId(leagueId).get());
+	}
+	
+	@GetMapping("/{leagueId}/goals-scored-chart.json")
+	public @ResponseBody ResponseEntity<LeagueTable> getGoalDifferenceChart(@PathVariable long leagueId) {
+		return ResponseEntity.ok(tableMgr.getTopScoringTeamsByLeagueResourceId(leagueId).get());
+	}
+	
+	@GetMapping("/{leagueId}/goal-difference-chart.json")
+	public @ResponseBody ResponseEntity<LeagueTable> getGoalsScoredChart(@PathVariable long leagueId) {
+		return ResponseEntity.ok(tableMgr.getTopGoalDifferenceByLeagueResourceId(leagueId).get());
 	}
 
 }
