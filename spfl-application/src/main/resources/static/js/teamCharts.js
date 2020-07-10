@@ -142,3 +142,103 @@ function getGoalDifferencePerGameChart(leagueId) {
 	});
 }
 
+function getLeagueTableByWeek(leagueId, teamResourceId) {
+	$.ajax('/league/' + leagueId + '/league-table-by-matchday.json', {
+	    success: function (data, status, xhr) {	    
+	    	var ctx = document.getElementById('tablesByMatchweekGraph');
+			
+			var labels = []; 
+			
+			for (var i = 0; i < data.leagueTables.length; i++) {
+				labels.push("Matchday " + (i+1));
+			}
+			
+			var chartData = []; 
+			
+			for (var i = 0; i < data.leagueTables.length; i++) {
+				for (var j = 0; j < data.leagueTables[i].entries.length; j++) {
+					if (data.leagueTables[i].entries[j].teamResourceId == teamResourceId) {
+						chartData.push(data.leagueTables[i].entries[j].position); 
+					}
+				}
+			}
+
+			console.log(labels);
+			
+	    	var leagueTablePerWeekChart = new Chart(ctx, {
+	    	    type: 'line',
+	    	    data: {
+	    	    	labels: labels, 
+	    	    	datasets: [{
+	    	    		label: "League Position",
+	    	    		data: chartData, 
+	    	    		borderColor: "rgb(0,123,255)", 
+	    	    		lineTension: 0
+	    	    	}]
+	    	    },
+	    	    options: {
+				  scales: {
+				    yAxes: [{
+				      ticks: {
+				        reverse: true,
+				        stepSize: 1, 
+				        max: 12, 
+				        min: 1
+				      }
+				    }]
+				  }
+				}
+	    	});
+		}
+	});
+}
+
+function getPointsWonPerWeek(leagueId, teamResourceId) {
+	$.ajax('/league/' + leagueId + '/league-table-by-matchday.json', {
+	    success: function (data, status, xhr) {	    
+	    	var ctx = document.getElementById('pointsWonByMatchWeekGraph');
+			
+			var labels = []; 
+			
+			for (var i = 0; i < data.leagueTables.length; i++) {
+				labels.push("Matchday " + (i+1));
+			}
+			
+			var chartData = []; 
+			
+			for (var i = 0; i < data.leagueTables.length; i++) {
+				for (var j = 0; j < data.leagueTables[i].entries.length; j++) {
+					if (data.leagueTables[i].entries[j].teamResourceId == teamResourceId) {
+						chartData.push(data.leagueTables[i].entries[j].points); 
+					}
+				}
+			}
+
+			console.log(labels);
+			
+	    	var pointsPerWeekChart = new Chart(ctx, {
+	    	    type: 'line',
+	    	    data: {
+	    	    	labels: labels, 
+	    	    	datasets: [{
+	    	    		label: "Points",
+	    	    		data: chartData, 
+	    	    		borderColor: "rgb(0,123,255)", 
+	    	    		lineTension: 0
+	    	    	}]
+	    	    },
+	    	    options: {
+				  scales: {
+				    yAxes: [{
+				      ticks: {
+				        stepSize: 1,  
+				        min: 0
+				      }
+				    }]
+				  }
+				}
+	    	});
+		}
+	});
+}
+

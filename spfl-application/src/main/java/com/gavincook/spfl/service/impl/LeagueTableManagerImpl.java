@@ -119,4 +119,16 @@ public class LeagueTableManagerImpl implements LeagueTableManager {
 			      .get(0));
 	}
 
+	@Override
+	public Optional<List<LeagueTable>> getMatchdayLeagueTableByTeam(long leagueResourceId) {
+		return Optional.ofNullable(webClient
+			      .get()
+			      .uri(leagueTableServiceUrl + "/league-tables/" + leagueResourceId + "/league-table-by-matchday")
+			      .retrieve()
+			      .toEntity(LeagueTableResponse.class)
+			      .block()
+			      .getBody()
+			      .getLeagueTables());
+	}
+
 }

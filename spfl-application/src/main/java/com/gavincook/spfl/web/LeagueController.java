@@ -4,12 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gavincook.spfl.Constants;
@@ -78,35 +76,4 @@ public class LeagueController {
 		
 		return mav;
 	}
-
-	@GetMapping("/{leagueId}/goal-difference-per-game-chart.json")
-	public @ResponseBody ResponseEntity<LeagueTable> getGoalDifferencePerGameChart(@PathVariable long leagueId) {
-		return ResponseEntity.ok(tableMgr.getTopGoalDifferencePerGameByLeagueResourceId(leagueId).get());
-	}	
-	
-	@GetMapping("/{leagueId}/goals-conceded-per-game-chart.json")
-	public @ResponseBody ResponseEntity<LeagueTable> getGoalsConcededPerGameChart(@PathVariable long leagueId) {
-		return ResponseEntity.ok(tableMgr.getTopDefensiveTeamPerGameByLeagueResourceId(leagueId).get());
-	}
-	
-	@GetMapping("/{leagueId}/goals-conceded-chart.json")
-	public @ResponseBody ResponseEntity<LeagueTable> getGoalsConcededChart(@PathVariable long leagueId) {
-		return ResponseEntity.ok(tableMgr.getTopDefensiveTeamsByLeagueResourceId(leagueId).get());
-	}
-	
-	@GetMapping("/{leagueId}/goals-scored-per-game-chart.json")
-	public @ResponseBody ResponseEntity<LeagueTable> getGoalsScoredPerGameChart(@PathVariable long leagueId) {
-		return ResponseEntity.ok(tableMgr.getTopGoalsPerGameByLeagueResourceId(leagueId).get());
-	}
-	
-	@GetMapping("/{leagueId}/goals-scored-chart.json")
-	public @ResponseBody ResponseEntity<LeagueTable> getGoalDifferenceChart(@PathVariable long leagueId) {
-		return ResponseEntity.ok(tableMgr.getTopScoringTeamsByLeagueResourceId(leagueId).get());
-	}
-	
-	@GetMapping("/{leagueId}/goal-difference-chart.json")
-	public @ResponseBody ResponseEntity<LeagueTable> getGoalsScoredChart(@PathVariable long leagueId) {
-		return ResponseEntity.ok(tableMgr.getTopGoalDifferenceByLeagueResourceId(leagueId).get());
-	}
-
 }

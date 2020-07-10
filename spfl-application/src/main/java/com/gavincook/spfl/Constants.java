@@ -8,4 +8,5 @@ public class Constants {
 	public static final String LEAGUE_NAME_LEAGUE_TWO = "league-two";
 	public static final String CUP_NAME_SCOTTISH_CUP = "scottish-cup";
 	public static final String CUP_NAME_LEAGUE_CUP = "league-cup";
+	public static final String ROUND_STR_ROOT = "Regular Season - ";
 }

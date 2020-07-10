@@ -48,7 +48,9 @@
 		<div class="row">
 			<div class="col-xs col-lg bg-white mx-2 p-4 border rounded shadow-sm">
 				<div class="row">
-					<div class="col"><h2>[[${league.name}]]</h2></div>
+					<div class="col">
+						<h2>[[${league.name}]]</h2>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -81,7 +83,7 @@
 								<td>[[${iter.index +1}]]</td>
 								<td colspan="4">
 									<img th:src="${entry.teamBadgeUrl}" alt="badge" width="30px" height="30px"/>
-									<span class="ml-4">[[${entry.teamName}]]</span>
+									<span class="ml-4"><a th:href="@{/team/__${entry.teamResourceId}__}">[[${entry.teamName}]]</a></span>
 								</td>
 								<td>[[${entry.matchesPlayed}]]</td>
 								<td>[[${entry.wins}]]</td>
@@ -237,6 +239,7 @@ $(document).ready(function () {
 	getGoalsConcededPerGameChart(leagueId);
 	getGoalDifferenceChart(leagueId);
 	getGoalDifferencePerGameChart(leagueId);
+	getFullLeagueTableByWeek(leagueId);
 });
 </script>
 </html>

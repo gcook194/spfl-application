@@ -3,7 +3,6 @@ package com.gavincook.spfl.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.gavincook.spfl.model.Competition;
 import com.gavincook.spfl.model.LeagueTable;
 
 public interface LeagueTableManager {
@@ -56,4 +55,11 @@ public interface LeagueTableManager {
 	 * @return
 	 */
 	Optional<LeagueTable> getTopGoalDifferencePerGameByLeagueResourceId(long leagueResourceId);
+
+	/**
+	 * creates a list of league tables divided by matchday for a team
+	 * @param resourceId
+	 * @return
+	 */
+	Optional<List<LeagueTable>> getMatchdayLeagueTableByTeam(long leagueResourceId);
 }
