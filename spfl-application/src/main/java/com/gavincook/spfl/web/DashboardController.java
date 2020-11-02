@@ -23,7 +23,7 @@ public class DashboardController {
 	@GetMapping("table")
 	public ModelAndView showDashboard() {
 		
-		LeagueTable premiershipTable = tableMgr.getTableByLeague(574L).get(0);
+		LeagueTable premiershipTable = tableMgr.getTableByLeague(2655L).get(0);
 		
 		return new ModelAndView("dashboard").addObject("premiershipTable", premiershipTable);
 	}

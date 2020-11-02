@@ -34,7 +34,7 @@ public class TeamController {
 		ModelAndView mav = new ModelAndView("team");
 		
 		Team team = teamMgr.getTeamByResourceId(teamResourceId); 
-		LeagueTable leagueTable = tableMgr.getTableByLeague(574L).get(0);
+		LeagueTable leagueTable = tableMgr.getTableByLeague(2655L).get(0);
 		
 		mav.addObject(team);
 		mav.addObject(leagueTable);

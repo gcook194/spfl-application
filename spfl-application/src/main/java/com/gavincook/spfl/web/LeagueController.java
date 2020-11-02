@@ -45,10 +45,10 @@ public class LeagueController {
 		switch (leagueName) {
 		case Constants.LEAGUE_NAME_PREMIERSHIP:
 			
-			league = leagueMgr.getCompetitionById(574L);
-			leagueTable = Optional.of(tableMgr.getTableByLeague(574L).get(0));
-			results = fixtureMgr.getRecentFixturesByStatusAndLeagueResourceId("FT", 574L);
-			fixtures = fixtureMgr.getUnPlayedFixturesByLeagueResourceId(574L);
+			league = leagueMgr.getCompetitionById(2655L);
+			leagueTable = Optional.of(tableMgr.getTableByLeague(2655L).get(0));
+			results = fixtureMgr.getRecentFixturesByStatusAndLeagueResourceId("FT", 2655L);
+			fixtures = fixtureMgr.getUnPlayedFixturesByLeagueResourceId(2655L);
 			
 			break;
 		case Constants.LEAGUE_NAME_CHAMPIONSHIP: 

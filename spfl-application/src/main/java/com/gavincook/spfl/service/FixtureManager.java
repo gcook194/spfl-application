@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.gavincook.spfl.model.Fixture;
+import com.gavincook.spfl.model.Lineup;
 
 public interface FixtureManager {
 
@@ -29,4 +30,18 @@ public interface FixtureManager {
 	 * @return
 	 */
 	Optional<List<Fixture>> getUnPlayedFixturesByLeagueResourceId(long leagueResourceId);
+	
+	/**
+	 * gets a fixture using the RapidApi resource ID
+	 * @param fixtureResourceId
+	 * @return
+	 */
+	Optional<Fixture> getFixtureByResourceId(long fixtureResourceId);
+	
+	/**
+	 * gets the lineups for a fixture
+	 * @param fixtureResourceId
+	 * @return
+	 */
+	Optional<List<Lineup>> getLineupsByFixtureId(long fixtureResourceId);
 }

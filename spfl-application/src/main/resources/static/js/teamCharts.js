@@ -162,8 +162,6 @@ function getLeagueTableByWeek(leagueId, teamResourceId) {
 					}
 				}
 			}
-
-			console.log(labels);
 			
 	    	var leagueTablePerWeekChart = new Chart(ctx, {
 	    	    type: 'line',
@@ -171,6 +169,7 @@ function getLeagueTableByWeek(leagueId, teamResourceId) {
 	    	    	labels: labels, 
 	    	    	datasets: [{
 	    	    		label: "League Position",
+	    	    		fill: false,
 	    	    		data: chartData, 
 	    	    		borderColor: "rgb(0,123,255)", 
 	    	    		lineTension: 0
@@ -213,8 +212,6 @@ function getPointsWonPerWeek(leagueId, teamResourceId) {
 					}
 				}
 			}
-
-			console.log(labels);
 			
 	    	var pointsPerWeekChart = new Chart(ctx, {
 	    	    type: 'line',
@@ -222,6 +219,7 @@ function getPointsWonPerWeek(leagueId, teamResourceId) {
 	    	    	labels: labels, 
 	    	    	datasets: [{
 	    	    		label: "Points",
+	    	    		fill: false,
 	    	    		data: chartData, 
 	    	    		borderColor: "rgb(0,123,255)", 
 	    	    		lineTension: 0
