@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gavincook.spfl.model.Fixture;
+import com.gavincook.spfl.model.FixtureStatistics;
 import com.gavincook.spfl.model.Lineup;
 import com.gavincook.spfl.service.FixtureManager;
 
@@ -34,9 +35,11 @@ public class FixtureController {
 		mav.addObject("fixture", fixture);
 		
 		Optional<List<Lineup>> lineup = fixtureMgr.getLineupsByFixtureId(fixtureResourceId);
+		Optional<List<FixtureStatistics>> statistics = fixtureMgr.getFixtureStatisticsByFixtureResourceId(fixtureResourceId);
 		
 		lineup.ifPresent(l -> mav.addObject("lineup", l));
+		statistics.ifPresent(s -> mav.addObject("statistics", s));
 		
-		return new ModelAndView("fixture");
+		return mav;
 	}
 }

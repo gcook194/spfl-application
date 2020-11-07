@@ -9,6 +9,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.gavincook.spfl.model.Fixture;
 import com.gavincook.spfl.model.FixtureListResponse;
+import com.gavincook.spfl.model.FixtureStatistics;
+import com.gavincook.spfl.model.FixtureStatisticsListResponse;
 import com.gavincook.spfl.model.Lineup;
 import com.gavincook.spfl.model.LineupListResponse;
 import com.gavincook.spfl.service.FixtureManager;
@@ -84,6 +86,18 @@ public class FixtureManagerImpl implements FixtureManager {
 			      .block()
 			      .getBody()
 			      .getLineups());
+	}
+
+	@Override
+	public Optional<List<FixtureStatistics>> getFixtureStatisticsByFixtureResourceId(long fixtureResourceId) {
+		return Optional.ofNullable(webClient
+			      .get()
+			      .uri(fixtureServiceUrl + "/fixture-data/" + fixtureResourceId + "/statistics")
+			      .retrieve()
+			      .toEntity(FixtureStatisticsListResponse.class)
+			      .block()
+			      .getBody()
+			      .getStatistics());
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.gavincook.spfl.model.Fixture;
+import com.gavincook.spfl.model.FixtureStatistics;
 import com.gavincook.spfl.model.Lineup;
 
 public interface FixtureManager {
@@ -44,4 +45,12 @@ public interface FixtureManager {
 	 * @return
 	 */
 	Optional<List<Lineup>> getLineupsByFixtureId(long fixtureResourceId);
+	
+
+	/**
+	 * gets the fixture statistics for a fixture
+	 * @param fixtureResourceId
+	 * @return
+	 */
+	Optional<List<FixtureStatistics>> getFixtureStatisticsByFixtureResourceId(long fixtureResourceId);
 }
