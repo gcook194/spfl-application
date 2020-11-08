@@ -13,7 +13,7 @@
 	                                <div class="page-header-icon"><i data-feather="activity"></i></div>
 	                                SPFL
 	                            </h1>
-	                            <div class="page-header-subtitle">Results, fixtures, news and more.</div>
+	                            <div class="page-header-subtitle">Results, fixtures.</div>
 	                        </div>
 	                    </div>
 	                </div>
@@ -22,9 +22,53 @@
 	        <!-- Main page content-->
 	        <div class="container mt-n10">
 				<div class="row">
-                	<div class="col-xxl-8">
+                	<div class="col-lg-8 col-xxl-8">
+                	<div class="card mb-4">
+                		<div class="card-header">Table</div>
+                		<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-sm table-hover league-table">
+									<thead>
+										<tr>
+											<th></th>
+											<th></th>
+											<th colspan="4"></th>
+											<th class="font-weight-light"><small>P</small></th>
+											<th class="font-weight-light"><small>W</small></th>
+											<th class="font-weight-light"><small>D</small></th>
+											<th class="font-weight-light"><small>L</small></th>
+											<th class="font-weight-light"><small>+/-</small></th>
+											<th class="font-weight-light"><small>GD</small></th>
+											<th class="font-weight-light"><small>Pts</small></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="entry,iter  : ${leagueTable.entries}">
+											<td th:if="${iter.index == 0}" style="background-color: rgb(19, 143, 22); width: 1%;"></td>
+											<td th:if="${iter.index > 0 && iter.index < 3}" style="background-color: rgb(58, 176, 211); width: 1%;"></td>
+											<td th:if="${iter.index > 2 && iter.index < 10}" style="background-color: rgb(255, 255, 255); width: 1%;"></td>
+											<td th:if="${iter.index == 10}" style="background-color: rgb(238, 172, 87); width: 1%;"></td>
+											<td th:if="${iter.index == 11}" style="background-color: rgb(215, 84, 82); width: 1%;"></td>
+											<td>[[${iter.index +1}]]</td>
+											<td colspan="4">
+												<img th:src="${entry.teamBadgeUrl}" alt="badge" width="30px" height="30px"/>
+												<span class="ml-4"><a th:href="@{/team/__${entry.teamResourceId}__}">[[${entry.teamName}]]</a></span>
+											</td>
+											<td>[[${entry.matchesPlayed}]]</td>
+											<td>[[${entry.wins}]]</td>
+											<td>[[${entry.draws}]]</td>
+											<td>[[${entry.losses}]]</td>
+											<td>[[${entry.goalsScored}]] / [[${entry.goalsConceded}]]</td>
+											<td>[[${entry.goalDifference}]]</td>
+											<td><strong>[[${entry.points}]]</strong></td>
+										</tr>
+									</tbody>
+								</table>				
+							</div>                		
+                		</div>
                 	</div>
-                	<div class="col-xxl-4">
+                	</div>
+                	<div class="col-lg-4 col-xxl-4">
 						<div class="card mb-4">
                         	<div class="card-header">Matches</div>
                             <div class="card-body">
@@ -39,7 +83,7 @@
 													<div class="d-flex">
 														<div class="flex-fill flex-shrink-0">
 														<div class="d-flex justify-content-end">
-															<span>[[${#strings.abbreviate(result.homeTeamName, 12)}]]&nbsp;</span>
+															<span class="mr-2">[[${#strings.abbreviate(result.homeTeamName, 12)}]]&nbsp;</span>
 															<img th:src="${result.homeTeamBadge}" alt="badge" width="20px" height="20px"/>															
 														</div>
 														</div>
@@ -51,7 +95,7 @@
 														<div class="flex-fill flex-shrink-0">
 															<div class="d-flex justify-content-start">
 																<img th:src="${result.awayTeamBadge}" alt="badge" width="20px" height="20px"/>
-																<span>&nbsp;[[${#strings.abbreviate(result.awayTeamName, 12)}]]</span>															
+																<span class="ml-2">&nbsp;[[${#strings.abbreviate(result.awayTeamName, 12)}]]</span>															
 															</div>
 														</div>														
 													</div>	
@@ -60,25 +104,6 @@
 		                                </div>
 									</th:block>
 								</th:block>
-								
-								<!-- Item 2-->
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="d-flex align-items-center flex-shrink-0 mr-3">
-                                        <div class="avatar avatar-xl mr-3 bg-gray-200"><img class="avatar-img img-fluid" th:src="@{/assets/img/freepik/profiles/profile-2.png}" alt="" /></div>
-                                        <div class="d-flex flex-column font-weight-bold">
-                                            <a class="text-dark line-height-normal mb-1" href="#!">Keelan Garza</a>
-                                            <div class="small text-muted line-height-normal">Position</div>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown no-caret">
-                                        <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownPeople2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="more-vertical"></i></button>
-                                        <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownPeople2">
-                                            <a class="dropdown-item" href="#!">Action</a>
-                                            <a class="dropdown-item" href="#!">Another action</a>
-                                            <a class="dropdown-item" href="#!">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                     	</div>
                 	</div>
