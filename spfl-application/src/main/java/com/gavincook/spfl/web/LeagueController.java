@@ -36,7 +36,7 @@ public class LeagueController {
 	@GetMapping("/{leagueName}")
 	public ModelAndView getLeague(@PathVariable String leagueName) {
 		
-		ModelAndView mav = new ModelAndView("league");
+		ModelAndView mav = new ModelAndView("spfl-dashboard");
 		Optional<Competition> league;
 		Optional<LeagueTable> leagueTable;
 		Optional<List<Fixture>> results;
